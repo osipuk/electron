@@ -46,8 +46,8 @@
 	
     const version = document.getElementById('version');
 	const webApp = document.getElementById('webApp');
-	webApp.style.width = window.innerWidth-10 + "px";
-	webApp.style.height = window.innerHeight-10 + "px";
+	webApp.style.width = window.innerWidth-3 + "px";
+	webApp.style.height = window.innerHeight-5 + "px";
     
     ipcRenderer.send('app_version');
     ipcRenderer.on('app_version', (event, arg) => {
