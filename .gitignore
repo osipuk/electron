@@ -1,0 +1,5 @@
+/node_modules
+/dist
+electron-builder.yml
+package.json
+readme.txt
