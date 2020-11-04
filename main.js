@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, MenuItem } = require('electron');
 const electron = require('electron');
 const url = require('url')
 const path = require('path')
@@ -22,6 +22,90 @@ app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, '/../', pl
 app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.445')
 
 let mainWindow;
+const menuTemplate = [
+  {
+     label: 'Inicio',
+     submenu: [
+        {
+          label: "Salir(Exit)",
+           role: 'quit'
+        },       
+        {
+           type: 'separator'
+        },
+        {
+           label: 'Nº versión('+app.getVersion()+')'
+        }
+     ]
+  },  
+  {
+     label: 'Vista(View)',
+     submenu: [
+        {
+          label: "Recarga(reload)",
+           role: 'reload'
+        },
+        { type: 'separator' },
+        {
+          label: "Tamaño original(Actual size)",
+           role: 'resetzoom'
+        },
+        {
+          label: "Aumentar(Zoom +)",
+           role: 'zoomin'
+        },
+        {
+          label: "Reducir(Zoom -)",
+           role: 'zoomout'
+        }
+     ]
+  },
+  
+   
+  {
+    label : "Ventana(window)",
+    submenu: [
+       {
+         label : "Pantalla completa(Full Screen)",
+         role: 'togglefullscreen'
+       },
+       {
+         label : "Minimizar(Minimize)",
+         role: 'minimize'
+       },
+       {
+         label : "Restaurar(Zoom)",
+         role: 'zoom'
+       },
+       {
+         label : "Cerrar",
+         role: 'close'
+       }
+    ]
+ },
+  {
+     label : "Ayuda(Help)",
+     role: 'help',
+     submenu: [
+      {
+        label: 'Ayuda de Espacio Onda',
+        click: async () => {
+          const { shell } = require('electron')
+          await shell.openExternal('https://editorial.ondaeduca.com/page/soporte')
+        }
+      },
+      {
+        label: 'Informar de incidencias',
+        click: async () => {
+          const { shell } = require('electron')
+          await shell.openExternal('https://editorial.ondaeduca.com/page/contactus')
+        }
+      },{
+        label: 'Info Licencia'        
+      }
+     ]
+  }
+]
 
 function createWindow () {
   const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
@@ -42,7 +126,8 @@ function createWindow () {
       protocol: 'file:',
       slashes: true
   }));
-
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
 
   const ses = mainWindow.webContents.session
 	ses.clearCache(function() {});
