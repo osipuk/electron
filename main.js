@@ -24,10 +24,10 @@ app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.445')
 let mainWindow;
 const menuTemplate = [
   {
-     label: 'Inicio',
+     label: 'File(Inicio)',
      submenu: [
         {
-          label: "Salir",
+          label: "Exit(Salir)",
            role: 'quit'
         },       
         {
@@ -39,23 +39,23 @@ const menuTemplate = [
      ]
   },  
   {
-     label: 'Vista',
+     label: 'View(Vista)',
      submenu: [
         {
-          label: "Recarga",
+          label: "Reload(Recarga)",
            role: 'reload'
         },
         { type: 'separator' },
         {
-          label: "Tamaño original",
+          label: "Actual size(Tamaño original)",
            role: 'resetzoom'
         },
         {
-          label: "Aumentar",
+          label: "Zoom+(Aumentar)",
            role: 'zoomin'
         },
         {
-          label: "Reducir",
+          label: "Zoom-(Reducir)",
            role: 'zoomout'
         }
      ]
@@ -63,28 +63,28 @@ const menuTemplate = [
   
    
   {
-    label : "Ventana",
+    label : "Window (Ventana)",
     submenu: [
        {
-         label : "Pantalla completa",
+         label : "Fullsize (Pantalla completa)",
          role: 'togglefullscreen'
        },
        {
-         label : "Minimizar",
+         label : "Minimize (Minimizar)",
          role: 'minimize'
        },
        {
-         label : "Restaurar",
+         label : "Zoom (Restaurar)",
          role: 'zoom'
        },
        {
-         label : "Cerrar",
+         label : "Close (Cerrar)",
          role: 'close'
        }
     ]
  },
   {
-     label : "Ayuda",     
+     label : "Help (Ayuda)",     
      submenu: [
       {
         label: 'Ayuda de Espacio Onda',
@@ -142,8 +142,11 @@ function createWindow () {
 	
   
   mainWindow.once('ready-to-show', () => {
-	autoUpdater.checkForUpdatesAndNotify();
+	  autoUpdater.checkForUpdatesAndNotify();
   });
+
+
+
 }
 
 app.on('ready', () => {
