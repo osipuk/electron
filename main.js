@@ -27,7 +27,7 @@ const menuTemplate = [
      label: 'Inicio',
      submenu: [
         {
-          label: "Salir(Exit)",
+          label: "Salir",
            role: 'quit'
         },       
         {
@@ -39,23 +39,23 @@ const menuTemplate = [
      ]
   },  
   {
-     label: 'Vista(View)',
+     label: 'Vista',
      submenu: [
         {
-          label: "Recarga(reload)",
+          label: "Recarga",
            role: 'reload'
         },
         { type: 'separator' },
         {
-          label: "Tamaño original(Actual size)",
+          label: "Tamaño original",
            role: 'resetzoom'
         },
         {
-          label: "Aumentar(Zoom +)",
+          label: "Aumentar",
            role: 'zoomin'
         },
         {
-          label: "Reducir(Zoom -)",
+          label: "Reducir",
            role: 'zoomout'
         }
      ]
@@ -63,18 +63,18 @@ const menuTemplate = [
   
    
   {
-    label : "Ventana(window)",
+    label : "Ventana",
     submenu: [
        {
-         label : "Pantalla completa(Full Screen)",
+         label : "Pantalla completa",
          role: 'togglefullscreen'
        },
        {
-         label : "Minimizar(Minimize)",
+         label : "Minimizar",
          role: 'minimize'
        },
        {
-         label : "Restaurar(Zoom)",
+         label : "Restaurar",
          role: 'zoom'
        },
        {
@@ -84,8 +84,7 @@ const menuTemplate = [
     ]
  },
   {
-     label : "Ayuda(Help)",
-     role: 'help',
+     label : "Ayuda",     
      submenu: [
       {
         label: 'Ayuda de Espacio Onda',
