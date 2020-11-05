@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu, MenuItem } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, dialog } = require('electron');
 const electron = require('electron');
 const url = require('url')
 const path = require('path')
@@ -8,7 +8,7 @@ let pluginName
 
 switch (process.platform) {
 	case 'win32':
-		pluginName = 'flash/pepflashplayer.dll'
+		pluginName = 'flash/pepflashplayer64_32_0_0_293.dll'
 		break;
 	case 'darwin':
 		pluginName = 'flash/PepperFlashPlayer.plugin';
@@ -22,6 +22,7 @@ app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, '/../', pl
 app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.445')
 
 let mainWindow;
+let fullscreenFlag = 0;
 const menuTemplate = [
   {
      label: 'Inicio',
@@ -34,7 +35,7 @@ const menuTemplate = [
            type: 'separator'
         },
         {
-           label: 'Nº versión('+app.getVersion()+')'
+           label: 'Versión '+app.getVersion()+''
         }
      ]
   },  
@@ -95,17 +96,29 @@ const menuTemplate = [
         }
       },
       {
-        label: 'Informar de incidencias',
+        label: 'Soporte técnico',
         click: async () => {
           const { shell } = require('electron')
           await shell.openExternal('https://editorial.ondaeduca.com/page/contactus')
         }
       },{
-        label: 'Info Licencia'        
+        label: 'Info Licencia',
+        click :   () => {
+          showAbout();
+         
+        }      
       }
      ]
   }
 ]
+
+function showAbout() {
+  dialog.showMessageBox({
+   title: `Info Licencia`,
+   message: `esta es la información de la licencia!`,
+   buttons: []
+  });
+ }
 
 function createWindow () {
   const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
@@ -126,6 +139,7 @@ function createWindow () {
       protocol: 'file:',
       slashes: true
   }));
+  
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
 
@@ -139,19 +153,15 @@ function createWindow () {
   });
 
   
-
-	
-  
   mainWindow.once('ready-to-show', () => {
 	  autoUpdater.checkForUpdatesAndNotify();
   });
 
-  // mainWindow.webContents.on('did-finish-load', () => {
-  //   mainWindow.webContents.executeJavaScript(
-  //     'window.print();console.log("ddddddddddddddddddd")',
-  //   );
-  // });
-
+  mainWindow.on('enter-full-screen', (event) => {
+    fullscreenFlag = !fullscreenFlag;
+    event.sender.send('setFullscreenFlag', { flag: fullscreenFlag });
+    
+  });
 
 }
 
@@ -170,6 +180,11 @@ app.on('activate', function () {
     createWindow();
   }
 });
+
+
+ 
+
+
 
 ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });

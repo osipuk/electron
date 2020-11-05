@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Espacio Onda</title>
+  <title>Navegador Espacio Onda</title>
   <style>
     body {
       box-sizing: border-box;
@@ -46,13 +46,18 @@
 	
     const version = document.getElementById('version');
 	const webApp = document.getElementById('webApp');
-	webApp.style.width = window.innerWidth-3 + "px";
-	webApp.style.height = window.innerHeight-5 + "px";
+	webApp.style.width = window.innerWidth  + "px";
+	webApp.style.height = window.innerHeight-1 + "px";
     
     ipcRenderer.send('app_version');
     ipcRenderer.on('app_version', (event, arg) => {
       ipcRenderer.removeAllListeners('app_version');
       //version.innerText = 'Version ' + arg.version;
+    });
+	
+    ipcRenderer.on('setFullscreenFlag', (event, arg) => { 
+	  webApp.requestFullscreen();
+	  
     });
 	
 	
