@@ -159,6 +159,7 @@ function createWindow () {
 
   mainWindow.on('enter-full-screen', (event) => {
     fullscreenFlag = !fullscreenFlag;
+    console.log(fullscreenFlag)
     event.sender.send('setFullscreenFlag', { flag: fullscreenFlag });
     
   });

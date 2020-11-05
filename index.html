@@ -47,7 +47,7 @@
     const version = document.getElementById('version');
 	const webApp = document.getElementById('webApp');
 	webApp.style.width = window.innerWidth  + "px";
-	webApp.style.height = window.innerHeight-5 + "px";
+	webApp.style.height = window.innerHeight-4 + "px";
     
     ipcRenderer.send('app_version');
     ipcRenderer.on('app_version', (event, arg) => {
@@ -56,8 +56,9 @@
     });
 	
     ipcRenderer.on('setFullscreenFlag', (event, arg) => { 
-	  webApp.requestFullscreen();
-	  
+		console.log("ddddddddddddddddd")
+	  	webApp.requestFullscreen();
+	  	console.log(arg.flag)
     });
 	
 	
