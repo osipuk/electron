@@ -24,10 +24,10 @@ app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.445')
 let mainWindow;
 const menuTemplate = [
   {
-     label: 'File(Inicio)',
+     label: 'Inicio',
      submenu: [
         {
-          label: "Exit(Salir)",
+          label: "Salir",
            role: 'quit'
         },       
         {
@@ -39,23 +39,24 @@ const menuTemplate = [
      ]
   },  
   {
-     label: 'View(Vista)',
+     label: 'Vista',
      submenu: [
         {
-          label: "Reload(Recarga)",
+          label: "Recarga",
            role: 'reload'
         },
+        {  label: "dev",role: 'toggledevtools' },
         { type: 'separator' },
         {
-          label: "Actual size(Tamaño original)",
+          label: "Tamaño original",
            role: 'resetzoom'
         },
         {
-          label: "Zoom+(Aumentar)",
+          label: "Aumentar",
            role: 'zoomin'
         },
         {
-          label: "Zoom-(Reducir)",
+          label: "Reducir",
            role: 'zoomout'
         }
      ]
@@ -63,28 +64,28 @@ const menuTemplate = [
   
    
   {
-    label : "Window (Ventana)",
+    label : "Ventana",
     submenu: [
        {
-         label : "Fullsize (Pantalla completa)",
+         label : "Pantalla completa",
          role: 'togglefullscreen'
        },
        {
-         label : "Minimize (Minimizar)",
+         label : "Minimizar",
          role: 'minimize'
        },
        {
-         label : "Zoom (Restaurar)",
+         label : "Restaurar",
          role: 'zoom'
        },
        {
-         label : "Close (Cerrar)",
+         label : "Cerrar",
          role: 'close'
        }
     ]
  },
   {
-     label : "Help (Ayuda)",     
+     label : "Ayuda",     
      submenu: [
       {
         label: 'Ayuda de Espacio Onda',
@@ -145,6 +146,11 @@ function createWindow () {
 	  autoUpdater.checkForUpdatesAndNotify();
   });
 
+  // mainWindow.webContents.on('did-finish-load', () => {
+  //   mainWindow.webContents.executeJavaScript(
+  //     'window.print();console.log("ddddddddddddddddddd")',
+  //   );
+  // });
 
 
 }
